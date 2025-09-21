@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import useTreeStore from '../stores/Treestore';
+import useTreeStore , { useTree } from '../stores/Treestore';
 
 const Tree = () => {
-  const tree = useTreeStore((state) => state.tree);
+  const tree = useTree();
   const [isModified, setIsModified] = useState(false);
   const textareaRef = useRef();
 

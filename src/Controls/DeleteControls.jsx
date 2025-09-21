@@ -1,11 +1,11 @@
 import React from 'react'
-import useTreeStore from '../stores/Treestore';
+import {useTree , useDelete} from '../stores/Treestore';
 import {enableMapSet } from 'immer';
 
 export default function DeleteControls() {
 
-  const treeData = useTreeStore((state) => state.tree);
-  const deleteNode = useTreeStore((state) => state.deleteNode);
+  const treeData = useTree();
+  const deleteNode = useDelete();
 
   const [selectedLeaf, setSelectedLeaf] = React.useState("");
   enableMapSet();

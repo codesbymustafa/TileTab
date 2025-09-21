@@ -1,10 +1,10 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import useTreeStore from '../stores/Treestore';
+import { useResize, useTree } from '../stores/Treestore';
 import LeafNode from './components/LeafNode';
 
 export default function LayoutRenderer() {
-  const tree = useTreeStore((state) => state.tree);
-  const resizeNode = useTreeStore((state) => state.resizeNode);
+  const tree = useTree();
+  const resizeNode = useResize();
   
   const [resizing, setResizing] = useState(null);
   const [startPos, setStartPos] = useState(0);

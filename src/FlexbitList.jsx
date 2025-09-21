@@ -1,8 +1,8 @@
-import useTreeStore from './stores/Treestore';
+import  { useAll_leaves } from './stores/Treestore';
 
 function FlexbitList() {
 
-    const components = useTreeStore((state) => state.tree.all_leaves);
+    const components = useAll_leaves();
 
   return (
     <ul className="list-none p-0 my-4">

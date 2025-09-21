@@ -1,11 +1,11 @@
 import React from 'react'
-import useTreeStore from '../stores/Treestore';
+import {useSplit, useTree} from '../stores/Treestore';
 import {enableMapSet } from 'immer';
 enableMapSet();
 export default function SplitControls() {
 
-  const treeData = useTreeStore((state) => state.tree);
-  const splitNode = useTreeStore((state) => state.splitNode);
+  const treeData = useTree();
+  const splitNode = useSplit();
   const [selectedLeaf, setSelectedLeaf] = React.useState("");
   const [splitType, setSplitType] = React.useState("horizontal");
   const [position, setPosition] = React.useState("top");
