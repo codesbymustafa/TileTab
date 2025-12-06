@@ -1,4 +1,6 @@
-export default function deleteLeaf (tree, leafId) {
+import { ContainerNode, LeafNode, TreeNode, TreeStructure } from "@/types";
+
+export default function deleteLeaf (tree : TreeStructure, leafId : string): TreeStructure {
   // Don't allow deleting the root if it's the only node
   if (leafId === "0" && tree.root.type === 'leaf') {
     console.error("Cannot delete the root leaf when it's the only node");
@@ -6,20 +8,22 @@ export default function deleteLeaf (tree, leafId) {
   }
   
   // Deep clone the tree to avoid mutations
-  const newTree = JSON.parse(JSON.stringify(tree));
+  const newTree: TreeStructure = JSON.parse(JSON.stringify(tree));
   
   // Function to update dimensions when promoting a sibling
-  const updateRatio = (node, parentRatio) => {
+  const updateRatio = (node : TreeNode , parentRatio : number) => {
     node.ratio = parentRatio;    
   };
   
   // Recursive function to find and delete the target leaf
-  const findAndDelete = (node, parentNode = null, childIndex = -1, grandparentNode = null, parentIndex = -1) => {
+  const findAndDelete = (node: TreeNode, parentNode: ContainerNode | null, childIndex = -1, grandparentNode: ContainerNode | null, parentIndex = -1): boolean => {
     if (!node) return false;
     
     // Found the target leaf
     if (node.id === leafId && node.type === 'leaf') {
-
+      if (!parentNode) {
+        return false;
+      }
       // Find the sibling
       const siblingIndex = childIndex === 0 ? 1 : 0;
       const sibling = parentNode.children[siblingIndex];
@@ -41,15 +45,17 @@ export default function deleteLeaf (tree, leafId) {
       }
       
       // Update all_leaves array
-      const leafIndex = newTree.all_leaves.findIndex(leaf => leaf.id === leafId);
+      interface Leaf { id: string; component: string }
+      
+      const leafIndex = newTree.all_leaves.findIndex((leaf: Leaf) => leaf.id === leafId);
 
       if (leafIndex !== -1) {
         newTree.all_leaves.splice(leafIndex, 1);
       }
 
       if(newTree.root.type === 'leaf'){
-        delete newTree.root.children
-        delete newTree.root.split
+        delete (newTree.root as any).children
+        delete (newTree.root as any).split
       }
 
       return true;

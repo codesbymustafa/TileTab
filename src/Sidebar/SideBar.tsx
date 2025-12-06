@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
-import SideBarContent from './SideBarContent';
+import SideBarContent from './SideBarContent.tsx';
 
 
 const SideBar = () => {
@@ -17,7 +17,7 @@ const SideBar = () => {
   }, []);
 
 const resize = useCallback(
-    (mouseMoveEvent) => {
+    (mouseMoveEvent: MouseEvent) => {
       if (isResizing) {
         const newWidth = window.innerWidth - mouseMoveEvent.clientX;
         if(newWidth < 250) {
@@ -48,7 +48,7 @@ const resize = useCallback(
   //shortcut to toggle sidebar visibility
 
   React.useEffect(() => {
-    const handleKeyDown = (event) => {
+    const handleKeyDown = (event: { key: string; ctrlKey: any; preventDefault: () => void; }) => {
       if (event.key === 'a' && event.ctrlKey) {
         event.preventDefault();
         toggleSidebar();

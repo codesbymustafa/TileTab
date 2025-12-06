@@ -1,4 +1,4 @@
-import  { useAll_leaves } from '/src/stores/Treestore.jsx';
+import { useAll_leaves } from './stores/Treestore';
 
 function FlexbitList() {
 

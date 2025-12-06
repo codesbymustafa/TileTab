@@ -1,9 +1,11 @@
-export default function splitLeaf (tree, leafId, splitType, position, newComponent) {
+import { TreeStructure, TreeNode, ContainerNode, LeafNode } from "@/types";
+
+export default function splitLeaf(tree: TreeStructure, leafId: string, splitType: 'horizontal' | 'vertical', position: 'top' | 'bottom' | 'left' | 'right', newComponent: string): TreeStructure {
   // Deep clone the tree to avoid mutations
-  const newTree = JSON.parse(JSON.stringify(tree));
+  const newTree: TreeStructure = JSON.parse(JSON.stringify(tree));
   
   // Recursive function to find and split the target leaf
-  const findAndSplit = (node) => {
+  const findAndSplit = (node: TreeNode, parentNode?: ContainerNode, childIndex?: number): boolean => {
     if (!node) return false;
     
     // Found the target leaf
@@ -12,23 +14,24 @@ export default function splitLeaf (tree, leafId, splitType, position, newCompone
       const originalComponent = node.component_connected;
       
       // Convert leaf to container
-      node.type = 'container';
-      node.split = splitType;
-      delete node.component_connected;
+      const containerNode = node as unknown as ContainerNode;
+      containerNode.type = 'container';
+      containerNode.split = splitType;
+      delete (node as any).component_connected;
       
       // Create two new leaf nodes
-      const child1 = {
+      const child1: LeafNode = {
         id: `${node.id}.1`,
         type: 'leaf',
         ratio: 50,
-        component_connected: null
+        component_connected: ''
       };
       
-      const child2 = {
+      const child2: LeafNode = {
         id: `${node.id}.2`,
         type: 'leaf',
         ratio: 50,
-        component_connected: null
+        component_connected: ''
       };
       
       // Assign components based on position
@@ -41,7 +44,7 @@ export default function splitLeaf (tree, leafId, splitType, position, newCompone
       }
       
       // Add children to the new container
-      node.children = [child1, child2];
+      containerNode.children = [child1, child2];
       
       // Update all_leaves array - remove old leaf, add new leaves
 
@@ -50,7 +53,9 @@ export default function splitLeaf (tree, leafId, splitType, position, newCompone
       const newId1 = {id : child1.id , component : child1.component_connected}
       const newId2 = {id : child2.id , component : child2.component_connected}
 
-      newTree.all_leaves.splice(leafIndex, 1, newId1 , newId2);
+      if (leafIndex !== -1) {
+        newTree.all_leaves.splice(leafIndex, 1, newId1 , newId2);
+      }
       
       return true;
     }

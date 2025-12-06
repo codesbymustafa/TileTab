@@ -11,6 +11,14 @@ export default function SplitControls() {
   const [position, setPosition] = React.useState("top");
   const [newComponent, setNewComponent] = React.useState("");
   
+  React.useEffect(() => {
+    if (splitType === "horizontal") {
+      setPosition("top");
+    } else {
+      setPosition("left");
+    }
+  }, [splitType]);
+
   // Handle split operation
   const handleSplit = () => {
     if (!selectedLeaf || !newComponent) {

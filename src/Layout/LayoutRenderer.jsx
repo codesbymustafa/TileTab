@@ -134,7 +134,7 @@ export default function LayoutRenderer() {
           
           ref={el => containerRefs.current[node.id] = el}
 
-          className={`flex ${isVerticalSplit ? 'flex-row' : 'flex-col'} relative } `}
+          className={`flex ${isVerticalSplit ? 'flex-row' : 'flex-col'} relative `}
 
           style={style}
         >
