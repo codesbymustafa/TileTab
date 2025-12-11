@@ -1,5 +1,5 @@
-import LayoutRenderer from '/src/Layout/LayoutRenderer.jsx';
-import SideBar from '/src/Sidebar/SideBar.jsx';
+import LayoutRenderer from '../../Layout/LayoutRenderer';
+import SideBar from '../../Sidebar/SideBar';
 import {enableMapSet } from 'immer';
 import './App.css'
 

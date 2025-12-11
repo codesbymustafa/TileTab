@@ -5,13 +5,13 @@ import splitLeaf from "../functions/splitfunction";
 import resize from "../functions/resizefunction";
 import { TreeStructure, TreeNode } from "@/types";
 
-interface TreeActions {
+export interface TreeActions {
   splitNode: (leafId: string, splitType: 'horizontal' | 'vertical', position: 'top' | 'bottom' | 'left' | 'right', newComponent: string) => void;
   deleteNode: (leafId: string) => void;
   resizeNode: (containerId: string, ratio1: number, ratio2: number) => void;
 }
 
-interface TreeStoreState {
+export interface TreeStoreState {
   tree: TreeStructure;
   actions: TreeActions;
 }
@@ -65,15 +65,15 @@ const useTreeStore = create<TreeStoreState>()(
     )
 );
 
-const useTree = () => {
+const useTree = (): TreeStructure => {
     return useTreeStore((state) => state.tree);
 };
 
-const useAll_leaves = () => {
+const useAll_leaves = (): TreeStructure['all_leaves'] => {
     return useTreeStore((state) => state.tree.all_leaves);
 };
 
-const useNodeById = (id: string) => {
+const useNodeById = (id: string): TreeNode | undefined => {
     const findNode = (node: TreeNode, id: string): TreeNode | undefined => {
         if (node.id === id) return node;
         if (node.type === 'container' && node.children) {
@@ -88,11 +88,11 @@ const useNodeById = (id: string) => {
     return useTreeStore((state) => findNode(state.tree.root, id));
 };
 
-const useDelete = () => useTreeStore((state) => state.actions.deleteNode);
+const useDelete = (): TreeActions['deleteNode'] => useTreeStore((state) => state.actions.deleteNode);
 
-const useSplit = () => useTreeStore((state) => state.actions.splitNode);
+const useSplit = (): TreeActions['splitNode'] => useTreeStore((state) => state.actions.splitNode);
 
-const useResize = () => useTreeStore((state) => state.actions.resizeNode);
+const useResize = (): TreeActions['resizeNode'] => useTreeStore((state) => state.actions.resizeNode);
 
 export { useTree, useAll_leaves, useNodeById, useDelete, useSplit, useResize };
 

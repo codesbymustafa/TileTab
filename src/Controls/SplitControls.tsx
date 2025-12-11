@@ -1,14 +1,18 @@
 import React from 'react'
-import {useSplit, useTree} from '/src/stores/Treestore';
+import {useSplit, useTree} from '../stores/Treestore';
 import {enableMapSet } from 'immer';
 enableMapSet();
+
+type SplitType = 'horizontal' | 'vertical';
+type Position = 'top' | 'bottom' | 'left' | 'right';
+
 export default function SplitControls() {
 
   const treeData = useTree();
   const splitNode = useSplit();
   const [selectedLeaf, setSelectedLeaf] = React.useState("");
-  const [splitType, setSplitType] = React.useState("horizontal");
-  const [position, setPosition] = React.useState("top");
+  const [splitType, setSplitType] = React.useState<SplitType>("horizontal");
+  const [position, setPosition] = React.useState<Position>("top");
   const [newComponent, setNewComponent] = React.useState("");
   
   React.useEffect(() => {
@@ -60,7 +64,7 @@ export default function SplitControls() {
               <label className="text-gray-400 text-xs">Split Type</label>
               <select 
                 value={splitType}
-                onChange={(e) => setSplitType(e.target.value)}
+                onChange={(e) => setSplitType(e.target.value as SplitType)}
                 className="px-3 py-1.5 bg-gray-700 text-white rounded text-sm border border-gray-600 focus:border-blue-500 focus:outline-none"
               >
                 <option value="horizontal">Horizontal</option>
@@ -73,7 +77,7 @@ export default function SplitControls() {
               <label className="text-gray-400 text-xs">Position</label>
               <select 
                 value={position}
-                onChange={(e) => setPosition(e.target.value)}
+                onChange={(e) => setPosition(e.target.value as Position)}
                 className="px-3 py-1.5 bg-gray-700 text-white rounded text-sm border border-gray-600 focus:border-blue-500 focus:outline-none"
               >
                 {splitType === "horizontal" ? (

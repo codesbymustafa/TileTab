@@ -4,7 +4,7 @@ import useTreeStore , { useTree } from '../stores/Treestore';
 const Tree = () => {
   const tree = useTree();
   const [isModified, setIsModified] = useState(false);
-  const textareaRef = useRef();
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Update textarea when tree changes from other sources
   useEffect(() => {
@@ -16,6 +16,7 @@ const Tree = () => {
   }, [tree]);
 
   const handleSave = () => {
+    if (!textareaRef.current) return;
     try {
       const parsedTree = JSON.parse(textareaRef.current.value);
       useTreeStore.setState({ tree: parsedTree });

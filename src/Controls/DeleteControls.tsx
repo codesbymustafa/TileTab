@@ -1,5 +1,5 @@
 import React from 'react'
-import {useTree , useDelete} from '/src/stores/Treestore';
+import {useTree , useDelete} from '../stores/Treestore';
 import {enableMapSet } from 'immer';
 
 export default function DeleteControls() {

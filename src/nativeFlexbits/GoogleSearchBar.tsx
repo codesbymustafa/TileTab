@@ -1,9 +1,13 @@
 import { useState, FormEvent, ChangeEvent, JSX } from "react";
 import { FiSearch } from "react-icons/fi"; // icon import
 
-type theme = "light" | "dark";
+type Theme = "light" | "dark";
 
-export default function GoogleSearchBar(theme : theme): JSX.Element {
+interface GoogleSearchBarProps {
+  theme?: Theme;
+}
+
+export default function GoogleSearchBar({ theme = 'light' }: GoogleSearchBarProps): JSX.Element {
   const [query, setQuery] = useState<string>("");
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -32,7 +36,7 @@ export default function GoogleSearchBar(theme : theme): JSX.Element {
     },
   };
 
-  const active = themes[theme] || themes.light;
+  const active = themes[theme];
 
   return (
     <form
