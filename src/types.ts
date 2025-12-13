@@ -1,3 +1,5 @@
+import {JSX} from 'react';
+
 // 1. Base Node (Shared Props)
 interface BaseNode {
   id: string;
@@ -38,7 +40,7 @@ export type FlexbitType = 'native' | 'remote' | 'exclusive';
 
 export interface FlexbitConfig {
   type: FlexbitType;
-  component: React.ComponentType<any>;
+  component: ({}:any) => JSX.Element;
   url?: string;
   permissions?: string[];
   defaultSettings?: Record<string, any>;

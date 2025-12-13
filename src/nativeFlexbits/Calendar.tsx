@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import React, { useState, useCallback, useRef, useEffect, JSX } from 'react';
 
 const MS_IN_DAY = 1000 * 60 * 60 * 24;
 const normalizeDate = (date: Date): Date => {
@@ -38,10 +38,10 @@ type CalendarDay = {
   date: Date;
 };
 
-const Calendar: React.FC<CalendarProps> = ({
+export default function Calendar ({
   theme = 'dark',
   primaryColor = '#3b82f6',
-}) => {
+} : CalendarProps) : JSX.Element {
   const today = new Date();
   const [range, setRange] = useState<DateRange>({ from: null, to: null });
   const [isDragging, setIsDragging] = useState<boolean>(false);
@@ -580,5 +580,3 @@ const Calendar: React.FC<CalendarProps> = ({
     </div>
   );
 };
-
-export default Calendar;

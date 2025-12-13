@@ -25,5 +25,4 @@ export const FLEXBIT_REGISTRY: Record<string, FlexbitConfig> = {
     type: "native",
     component: Blank
   }
-
 };
