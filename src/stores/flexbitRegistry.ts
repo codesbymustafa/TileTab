@@ -1,4 +1,5 @@
 // Import your Native Components here
+import Blank from '../nativeFlexbits/Blank';
 import Calendar from '../nativeFlexbits/Calendar';
 import Clock from '../nativeFlexbits/Clock';
 import GoogleSearchBar from '../nativeFlexbits/GoogleSearchBar';
@@ -19,6 +20,10 @@ export const FLEXBIT_REGISTRY: Record<string, FlexbitConfig> = {
   "Calendar": {
     type: "native",
     component: Calendar
+  },
+  "Blank": {
+    type: "native",
+    component: Blank
   }
 
 };
