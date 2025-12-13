@@ -50,14 +50,14 @@ export const ResizeHandle: React.FC<ResizeHandleProps> = ({
         className={`
           absolute overflow-hidden
           ${isVerticalSplit
-            ? 'w-px h-[30px] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:h-full '
-            : 'h-px w-[30px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:w-full'}
+            ? `w-px h-[30px] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:h-full `
+            : `h-px w-[30px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:w-full`}
           ${resizing?.parentId === nodeId
             ? 'bg-blue-500 h-full w-full'
             : 'bg-gray-500 group-hover:bg-gray-400'}
           transition-all duration-200 ease-out
         `}
-      />
+        />
     </div>
   );
 };
