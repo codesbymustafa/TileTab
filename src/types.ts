@@ -38,7 +38,7 @@ export type FlexbitType = 'native' | 'remote' | 'exclusive';
 
 export interface FlexbitConfig {
   type: FlexbitType;
-  component?: React.ComponentType<any>;
+  component: React.ComponentType<any>;
   url?: string;
   permissions?: string[];
   defaultSettings?: Record<string, any>;
